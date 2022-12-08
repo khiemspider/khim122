@@ -11,7 +11,7 @@ const MyComponent = () =>{
    const [job, setJob]= useState([{nameFim: ' Spider-Man-Amazing ', year: 2000 }
     , { nameFim: ' Venom ' , year:1999 }
   ])
-   
+    const nameMusic= { name: ' Sao cũng được' , time : 3}
 
    const evenJob = job.map((r)=>{
     
@@ -39,6 +39,7 @@ const MyComponent = () =>{
     
     return(
       <>
+      {console.log('Check Obj:' , nameMusic)}
         <form action="/action_page.php">
         <label>First name: </label><br/>
         <input onChange={(e) => eventChangeText(e)}
@@ -63,6 +64,8 @@ const MyComponent = () =>{
        name={first}
        age={last}
        address ={evenJob}
+       music = {nameMusic.name}  
+       times ={nameMusic.time}
 />
 </>
     )    
