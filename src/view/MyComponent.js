@@ -8,9 +8,11 @@ import React, { useState }  from 'react';
 const MyComponent = () =>{
    const [first , setFirst] = useState('')
    const [last, setLast]= useState('')
-   const [job, setJob]= useState([{nameFim: ' Spider-Man-Amazing ', year: 2000 }
+   const [job, setJob]= useState([
+    {nameFim: ' Spider-Man-Amazing ', year: 2000 }
     , { nameFim: ' Venom ' , year:1999 }
   ])
+   
     const nameMusic= { name: ' Sao cũng được' , time : 3}
 
    const evenJob = job.map((r)=>{
@@ -39,7 +41,7 @@ const MyComponent = () =>{
     
     return(
       <>
-      {console.log('Check Obj:' , nameMusic)}
+      {/* {console.log('Check Obj:' , nameMusic)} */}
         <form action="/action_page.php">
         <label>First name: </label><br/>
         <input onChange={(e) => eventChangeText(e)}
