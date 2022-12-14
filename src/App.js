@@ -1,38 +1,57 @@
 import logo from './logo.svg';
+import Covid from './covid/Covid';
 import './App.css';
 import MyComponent from './view/MyComponent.js';
 import Nav from './view/Nav.js';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import ChildComponent from './view/ChildComponent';
 import Todo from './view/Todo';
 
 
 // 2 : class component & function component
 
-function  App() {
+
 
   //const [name , setName] = useState('')
-  const [address, setAddress] =useState('')
-const [todos ,setTodos] = useState([
-  {todo: 'Có lẽ ' , tiltle:'maybe '},
-{todo:'cuộc đời ', tiltle:'sóng gió '},
-])
- 
-
-  const handleEventInput =(e)=>{
-    setAddress(e.target.value)
-  }
-
-  const  handleEventClick =(e)=>{
-    if( !address){
-      alert('empty input' )
-      return
+  const TODO_INITIAL_STATE = [
+    { id: 'Có lẽ ', title: 'maybe ', type: '123' },
+    { id: 'cuộc đời ', title: 'sóng gió ', type: 'NDK' },
+    { id: 'da dẻ ', title: 'homeming ', type: '345' },
+    { id: 'cuộc đời cát bụi ', title: 'sóng gió thương trường ', type: 'abc' }
+  ]
+  
+  function App() {
+  
+    useEffect(()=>{
+      console.log('run UseEffect')
+    },[TODO_INITIAL_STATE.title])
+  
+    //const [name , setName] = useState('')
+    const [address, setAddress] = useState('')
+    const [todos, setTodos] = useState(TODO_INITIAL_STATE)
+  
+    const handleEventInput = (e) => {
+      setAddress(e.target.value)
     }
-    // setName(even.target.value)
-    let newtodos ={todo:'tiếp nè', tiltle: address}
-    setTodos([...todos , newtodos])
-    // console.log('>>>>Click me', address)
+    const handleDeleteTodo = (id) => {
+      setTodos((prevState) => (prevState.filter(item => item.id !== id)))
+    }
+    const gerateTodoId = () => Math.floor(Math.random() * 10000) + 1
+    const handleEventClick = () => {
+      if (!address) {
+        alert('Bạn cần nhập dữ liệu ')
+        return
+      }
+      // setName(even.target.value)
+      const newtodos = {
+        id: gerateTodoId(),
+        title: address,
+        type: "NDK"
+      }
+      setTodos((prevState) => ([...prevState, newtodos]))
+      setAddress('')
   }
+
   return (
     <>
      <Nav/>
@@ -50,11 +69,25 @@ const [todos ,setTodos] = useState([
         </p>
         
         </div> */}
-        <Todo
-        mydata={todos}/>
-        <input type={'text'}  onChange={(e)=> handleEventInput(e)}></input>
-        <button type='button' value={address} onClick={(e)=> handleEventClick(e)}> LOGIN</button>
-       
+       {/* <Todo
+            myData={todos}
+            title="All todo"
+            onDeleteTodo={handleDeleteTodo}
+          />
+          <Todo
+            myData={todos?.filter(item => item.type === "NDK")}
+            title="NDK"
+            onDeleteTodo={handleDeleteTodo}
+          />
+          <input
+            value={address}
+            type='text'
+            onChange={handleEventInput}
+          />
+          <button type='button' onClick={handleEventClick}>
+            LOGIN
+         </button> */}
+       <Covid/>
        
          
       </header>
@@ -62,8 +95,9 @@ const [todos ,setTodos] = useState([
     </div>
     
     </>
-    
+  
   );
-}
+      }
+
 
 export default App;

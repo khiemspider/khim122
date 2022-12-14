@@ -1,22 +1,37 @@
-import React,{useState} from "react";
+import React from "react";
 
-const Todo=(props)=>{
-    const todos = props.mydata
-    return( <>
+
+const Todo = ({ myData, title, onDeleteTodo }) => {
+
+  const handleDelete = (id) => {
+    onDeleteTodo(id)
+  }
+
+  return (<>
     
-     <div className='todo-container'>
-       {todos.map(todo =>{
-        return <li> {todo.tiltle}</li>
-       })}
-       
-        <p style={{ color: 'green' , fontSize: '30px'}}>         
-          Hello Spider Man !
-        </p>
-        </div>
-    </>
+    <div className='todo-container'>
+      
+      <div className="tiltle">
         
+        {title}
+      </div>
+      
+      {myData?.map(item => {
+        return <li
+          key={item.title}
+        >
+          <span>{item.title}</span>
+          <span onClick={() => handleDelete(item.id)}>
+            x
+          </span>
+        </li>
+      })}
+      <hr />
+    </div>
+  </>
 
 
-    )
+
+  )
 }
 export default Todo;
